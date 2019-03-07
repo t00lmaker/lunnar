@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import './categoria.dart';
 
-class RegistrePage extends StatefulWidget {
-  @override
-  _RegistrePageState createState() => new _RegistrePageState();
-}
+class RegistrePage extends StatelessWidget {
+  final Categoria categoria;
 
-class _RegistrePageState extends State<RegistrePage> {
+  final Color textColor = Colors.white;
+
+  RegistrePage({Key key, @required this.categoria}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.pinkAccent,
+          backgroundColor: this.categoria.color,
           elevation: 0.0,
-          iconTheme: new IconThemeData(color: Colors.white),
+          iconTheme: new IconThemeData(color: this.textColor),
           actions: <Widget>[
             new IconButton(
                 icon: new Icon(Icons.save),
                 alignment: Alignment.center,
-                color: Colors.white,
-                tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                color: this.textColor,
+                tooltip: "Salvar",
                 onPressed: () {
                   Navigator.maybePop(context);
                 }),
@@ -26,28 +28,45 @@ class _RegistrePageState extends State<RegistrePage> {
         ),
         body: new Center(
             child: new Container(
-                color: Colors.pinkAccent,
-                padding: EdgeInsets.all(20.0),
+                color: this.categoria.color,
+                padding:
+                    EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                alignment: Alignment.center,
                 child: new Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    new Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(10.0),
+                      child: new Text(
+                        this.categoria.description + ' ...',
+                        style: new TextStyle(
+                            color: this.textColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28.0),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                     new TextField(
                       keyboardType: TextInputType.multiline,
-                      maxLines: 6,
+                      maxLines: 10,
                       maxLength: 280,
-                      focusNode: null,
+                      autofocus: false,
                       decoration: new InputDecoration(
                           filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'This is a hint',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(style: BorderStyle.none, color: Colors.white, width: 0.0),
-                            borderRadius: BorderRadius.all(new Radius.circular(7.0))
-                          )),
-                      style: TextStyle(
-                        color: Colors.pinkAccent,
-                        fontSize: 18.0,
-                        ),
+                          fillColor: this.textColor,
+                          hintText: 'Digite aqui seu bilhete ...',
+                          border: new OutlineInputBorder(
+                              borderSide: new BorderSide(
+                                  style: BorderStyle.none,
+                                  color: this.categoria.color,
+                                  width: 0.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(7.0)))),
+                      style: new TextStyle(
+                        color: this.categoria.color,
+                        fontSize: 20.0,
+                      ),
                     )
                   ],
                 ))));
