@@ -2,6 +2,7 @@ name: lunnar
 description: A love app.
 
 dependencies:
+  flutter_facebook_login:
   flutter:
     sdk: flutter
 
